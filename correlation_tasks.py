@@ -1,15 +1,13 @@
-"""Задачи второй части лабораторной: корреляционный анализ."""
-from __future__ import annotations
+from dataclasses import dataclass
 
-from grader_contracts.correlation_tasks import BrainCorrelationSummary, BrainDataInput
+@dataclass(frozen=True)
+class BrainDataInput:
+    csv_path: str
 
-
-def analyze_brain_correlations(data: BrainDataInput) -> BrainCorrelationSummary:
-    """Проанализируйте brainsize.txt.
-
-    Разделите наблюдения по полу и для каждой группы вычислите корреляции
-    признаков FSIQ, VIQ, PIQ, Weight, Height с MRI_Count методом Пирсона.
-    В strongest_mri_feature верните название признака с наибольшим модулем
-    корреляции с MRI_Count среди объединённых результатов двух групп.
-    """
-    raise NotImplementedError
+@dataclass(frozen=True)
+class BrainCorrelationSummary:
+    men_count: int
+    women_count: int
+    women_mri_correlation: dict[str, float]
+    men_mri_correlation: dict[str, float]
+    strongest_mri_feature: str
